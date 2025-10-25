@@ -184,7 +184,7 @@ export const storage = {
     }
 
     // Check file type
-    if (!config.allowedTypes.includes(file.type)) {
+    if (!(config.allowedTypes as readonly string[]).includes(file.type)) {
       return {
         isValid: false,
         error: `File type ${file.type} not allowed. Allowed types: ${config.allowedTypes.join(', ')}`
