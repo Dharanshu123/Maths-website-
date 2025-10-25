@@ -1,6 +1,5 @@
 import { supabase } from './supabase'
 import type { User, Session } from '@supabase/supabase-js'
-import React from 'react'
 
 export interface UserProfile {
   id: string
@@ -212,12 +211,13 @@ export const useAuth = () => {
 // PROTECTED ROUTE WRAPPER
 // =============================================
 
-export const withAuth = (WrappedComponent: React.ComponentType, requiredRole?: string) => {
+export const withAuth = (WrappedComponent: any, requiredRole?: string) => {
   return function AuthenticatedComponent(props: any) {
     // This would check authentication and role
     // Redirect to login if not authenticated
     // Show error if insufficient role
-    return <WrappedComponent {...props} />
+    // return <WrappedComponent {...props} />
+    return null // Placeholder - implement authentication logic
   }
 }
 
