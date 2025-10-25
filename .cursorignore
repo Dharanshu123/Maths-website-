@@ -1,0 +1,13 @@
+# Cursor ignore file
+# This file tells Cursor which files to ignore or include
+
+# Include .env.local file (override default ignore)
+!.env.local
+
+# Standard ignores
+node_modules/
+.next/
+dist/
+build/
+*.log
+.DS_Store

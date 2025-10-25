@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Avatar Placeholders</title>
+</head>
+<body>
+    <canvas id="canvas" width="160" height="160" style="display: none;"></canvas>
+    
+    <script>
+        // Create placeholder avatars for testimonials
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        const avatars = [
+            { name: 'L', color: '#FF6B6B', filename: 'parent-woman-1.jpg' },
+            { name: 'R', color: '#4ECDC4', filename: 'parent-woman-2.jpg' },
+            { name: 'C', color: '#45B7D1', filename: 'student-asian-girl.jpg' },
+            { name: 'J', color: '#96CEB4', filename: 'parent-man-1.jpg' },
+            { name: 'A', color: '#FFEAA7', filename: 'parent-man-2.jpg' },
+            { name: 'B', color: '#DDA0DD', filename: 'student-girl-1.jpg' },
+            { name: 'K', color: '#98D8C8', filename: 'parent-woman-3.jpg' },
+            { name: 'M', color: '#F7DC6F', filename: 'student-girl-2.jpg' },
+            { name: 'S', color: '#BB8FCE', filename: 'teacher-woman.jpg' }
+        ];
+        
+        avatars.forEach(avatar => {
+            // Clear canvas
+            ctx.clearRect(0, 0, 160, 160);
+            
+            // Draw circle background
+            ctx.beginPath();
+            ctx.arc(80, 80, 75, 0, 2 * Math.PI);
+            ctx.fillStyle = avatar.color;
+            ctx.fill();
+            
+            // Draw letter
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 60px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(avatar.name, 80, 80);
+            
+            // Convert to blob and download
+            canvas.toBlob(blob => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = avatar.filename;
+                a.click();
+                URL.revokeObjectURL(url);
+            }, 'image/jpeg', 0.9);
+        });
+        
+        console.log('Avatar placeholders generated!');
+    </script>
+</body>
+</html>
