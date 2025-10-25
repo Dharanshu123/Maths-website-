@@ -47,7 +47,7 @@ export const storage = {
       // Validate file
       const validation = storage.validateFile(file, bucket)
       if (!validation.isValid) {
-        throw new Error(validation.error)
+        throw new Error(validation.error || 'File validation failed')
       }
 
       // Generate unique filename if not provided
