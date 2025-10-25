@@ -1,5 +1,6 @@
 import { supabase } from './supabase'
 import type { User, Session } from '@supabase/supabase-js'
+import React from 'react'
 
 export interface UserProfile {
   id: string
