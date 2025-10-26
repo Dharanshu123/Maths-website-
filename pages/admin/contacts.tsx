@@ -78,7 +78,7 @@ export default function AdminContacts() {
 
   const getUniqueServices = () => {
     const services = contacts.map(c => c.service_interest).filter(Boolean)
-    return [...new Set(services)]
+    return Array.from(new Set(services))
   }
 
   const formatDate = (dateString: string) => {
