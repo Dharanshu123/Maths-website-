@@ -19,7 +19,7 @@ export default async function handler(
         user: process.env.GMAIL_USER, // Your Gmail address
         pass: process.env.GMAIL_APP_PASSWORD // Your Gmail app password
       }
-    })
+    } as any)
 
     // Send email
     await transporter.sendMail({
