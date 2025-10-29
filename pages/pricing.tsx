@@ -1,10 +1,13 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import Layout from '../components/Layout'
 import { supabase, PricingPlan } from '../lib/supabase'
 
 export default function Pricing() {
+  const router = useRouter()
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null)
   // Professional pricing plans with systematic structure
   const pricingPlans = [
     {
@@ -68,8 +71,23 @@ export default function Pricing() {
     }
   ]
 
+  // Check for payment status on page load
+  useEffect(() => {
+    const { status } = router.query
+    if (status === 'cancelled') {
+      // Show a subtle notification that payment was cancelled
+      console.log('Payment was cancelled by user')
+    }
+  }, [router.query])
+
   const handlePayment = async (plan: any) => {
+    if (loadingPlan) return // Prevent multiple clicks
+    
+    setLoadingPlan(plan.id.toString())
+    
     try {
+      console.log('Initiating payment for plan:', plan.name)
+      
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: {
@@ -82,17 +100,49 @@ export default function Pricing() {
         }),
       })
 
-      if (response.ok) {
-        const data = await response.json()
+      const data = await response.json()
+
+      if (response.ok && data.url) {
+        console.log('Redirecting to Stripe Checkout:', data.url)
         // Redirect to Stripe Checkout
         window.location.href = data.url
       } else {
-        const error = await response.json()
-        alert('Error: ' + error.error)
+        console.error('Checkout session creation failed:', data)
+        throw new Error(data.error || 'Failed to create checkout session')
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Payment error:', error)
-      alert('An error occurred. Please try again.')
+      setLoadingPlan(null)
+      
+      // Show user-friendly error message
+      const errorMessage = error.message || 'Unable to process payment. Please try again.'
+      
+      // Create a simple error notification instead of alert
+      const errorDiv = document.createElement('div')
+      errorDiv.innerHTML = `
+        <div style="
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: #fee2e2;
+          border: 1px solid #fecaca;
+          color: #dc2626;
+          padding: 1rem;
+          border-radius: 8px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          z-index: 1000;
+          max-width: 300px;
+        ">
+          <strong>Payment Error:</strong><br>
+          ${errorMessage}
+        </div>
+      `
+      document.body.appendChild(errorDiv)
+      
+      // Remove error message after 5 seconds
+      setTimeout(() => {
+        document.body.removeChild(errorDiv)
+      }, 5000)
     }
   }
 
@@ -158,16 +208,33 @@ export default function Pricing() {
                     </ul>
                     <button 
                       onClick={() => handlePayment(plan)}
+                      disabled={loadingPlan === plan.id.toString()}
                       className="item-pricing__button"
                       style={{ 
                         background: plan.isPopular ? '#007bff' : undefined,
                         border: plan.isPopular ? '2px solid #007bff' : undefined,
-                        cursor: 'pointer',
+                        cursor: loadingPlan === plan.id.toString() ? 'not-allowed' : 'pointer',
                         width: '100%',
-                        textAlign: 'center'
+                        textAlign: 'center',
+                        opacity: loadingPlan === plan.id.toString() ? 0.7 : 1,
+                        position: 'relative'
                       }}
                     >
-                      {plan.buttonText}
+                      {loadingPlan === plan.id.toString() ? (
+                        <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                          <span style={{
+                            width: '16px',
+                            height: '16px',
+                            border: '2px solid transparent',
+                            borderTop: '2px solid currentColor',
+                            borderRadius: '50%',
+                            animation: 'spin 1s linear infinite'
+                          }}></span>
+                          Processing...
+                        </span>
+                      ) : (
+                        plan.buttonText
+                      )}
                     </button>
                   </div>
                 </div>
