@@ -114,7 +114,7 @@ const testimonialData = [
     message: "I would like to let you know that your program is absolutely fantastic. My kids love it, my daughter actually say she loves maths now because whenever a new topic is being taught in the class room she understands it a lot better and that is because of your easy to understand short video lessons you provide at the beginning of every lesson. Thank you for saving me time, money and anxiety.",
     rating: 5,
     featured: false,
-    image: "/images/testimonials/nike-ajao.png" // Real photo of Nike Ajao - Young man with beard
+    image: "/images/testimonials/nike-ajao.png" // Real photo of Nike Ajao
   }
 ]
 

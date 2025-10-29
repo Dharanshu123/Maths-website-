@@ -31,9 +31,6 @@ const Header = () => {
                 <li className="menu__item">
                   <Link href="/services" className="menu__link">Services</Link>
                 </li>
-                <li className="menu__item">
-                  <Link href="/admin/contacts" className="menu__link">Admin</Link>
-                </li>
               </ul>
             </nav>
           </div>

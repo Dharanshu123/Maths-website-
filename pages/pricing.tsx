@@ -5,33 +5,70 @@ import Layout from '../components/Layout'
 import { supabase, PricingPlan } from '../lib/supabase'
 
 export default function Pricing() {
-  const [pricingPlans, setPricingPlans] = useState<PricingPlan[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => {
-    fetchPricingPlans()
-  }, [])
-
-  const fetchPricingPlans = async () => {
-    try {
-      setLoading(true)
-      const { data, error } = await supabase
-        .from('pricing_plans')
-        .select('*')
-        .eq('is_published', true)
-        .order('order_index', { ascending: true })
-
-      if (error) throw error
-      setPricingPlans(data || [])
-    } catch (err: any) {
-      setError(err.message)
-    } finally {
-      setLoading(false)
+  // Professional pricing plans with systematic structure
+  const pricingPlans = [
+    {
+      id: 1,
+      name: "Basic Tutoring",
+      price: 45,
+      period: "session",
+      description: "Perfect for students needing occasional help with homework and basic concepts",
+      features: [
+        "1-on-1 Online Sessions",
+        "Homework Support", 
+        "Basic Progress Tracking",
+        "Email Support",
+        "Flexible Scheduling",
+        "Session Recording Available"
+      ],
+      buttonText: "Get Started",
+      isPopular: false,
+      color: "#4a5568"
+    },
+    {
+      id: 2,
+      name: "Premium Tutoring",
+      price: 65,
+      period: "session", 
+      description: "Ideal for students who need regular support and advanced learning strategies",
+      features: [
+        "1-on-1 Online Sessions",
+        "Customized Learning Plans",
+        "Progress Reports",
+        "Exam Preparation",
+        "Priority Scheduling",
+        "Parent Updates",
+        "Study Materials Included",
+        "24/7 Chat Support"
+      ],
+      buttonText: "Choose Premium",
+      isPopular: true,
+      color: "#3182ce"
+    },
+    {
+      id: 3,
+      name: "Intensive Package",
+      price: 299,
+      period: "month",
+      description: "Complete solution for students preparing for major exams with comprehensive support",
+      features: [
+        "8 Sessions Per Month",
+        "Dedicated Tutor Assignment",
+        "Comprehensive Exam Prep",
+        "Mock Tests & Analysis",
+        "Study Schedule Planning",
+        "Parent-Teacher Meetings",
+        "Priority Support",
+        "Performance Analytics",
+        "Resource Library Access"
+      ],
+      buttonText: "Contact Us",
+      isPopular: false,
+      color: "#2d3748"
     }
-  }
+  ]
 
-  const handlePayment = async (plan: PricingPlan) => {
+  const handlePayment = async (plan: any) => {
     try {
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
@@ -81,28 +118,10 @@ export default function Pricing() {
               Select the plan that works best for you and your business goals.
             </div>
             <div className="pricing__row">
-              {loading && (
-                <div style={{ textAlign: 'center', padding: '2rem', width: '100%' }}>
-                  <h2>Loading pricing plans...</h2>
-                </div>
-              )}
-              
-              {error && (
-                <div style={{ textAlign: 'center', padding: '2rem', color: 'red', width: '100%' }}>
-                  <h2>Error loading pricing: {error}</h2>
-                </div>
-              )}
-              
-              {!loading && !error && pricingPlans.length === 0 && (
-                <div style={{ textAlign: 'center', padding: '2rem', width: '100%' }}>
-                  <h2>No pricing plans available</h2>
-                </div>
-              )}
-              
               {pricingPlans.map((plan) => (
                 <div key={plan.id} className="pricing__column">
-                  <div className={`pricing__item item-pricing ${plan.is_popular ? 'popular' : ''}`} style={{ position: 'relative' }}>
-                    {plan.is_popular && (
+                  <div className={`pricing__item item-pricing ${plan.isPopular ? 'popular' : ''}`} style={{ position: 'relative' }}>
+                    {plan.isPopular && (
                       <div style={{ 
                         position: 'absolute', 
                         top: '-10px', 
@@ -123,7 +142,7 @@ export default function Pricing() {
                       <div className="item-pricing__cost">
                         ${plan.price}
                         <span style={{ fontSize: '0.5em', fontWeight: 'normal' }}>
-                          /{plan.price_period}
+                          /{plan.period}
                         </span>
                       </div>
                       {plan.description && (
@@ -141,14 +160,14 @@ export default function Pricing() {
                       onClick={() => handlePayment(plan)}
                       className="item-pricing__button"
                       style={{ 
-                        background: plan.is_popular ? '#007bff' : undefined,
-                        border: plan.is_popular ? '2px solid #007bff' : undefined,
+                        background: plan.isPopular ? '#007bff' : undefined,
+                        border: plan.isPopular ? '2px solid #007bff' : undefined,
                         cursor: 'pointer',
                         width: '100%',
                         textAlign: 'center'
                       }}
                     >
-                      {plan.button_text}
+                      {plan.buttonText}
                     </button>
                   </div>
                 </div>
