@@ -100,7 +100,23 @@ export default function Pricing() {
         }),
       })
 
-      const data = await response.json()
+      // Check if response has content and is JSON
+      let data: any = {}
+      const contentType = response.headers.get('content-type')
+      
+      if (contentType && contentType.includes('application/json')) {
+        try {
+          data = await response.json()
+        } catch (jsonError) {
+          console.error('Failed to parse JSON response:', jsonError)
+          throw new Error('Invalid response format from server')
+        }
+      } else {
+        // Handle non-JSON responses
+        const textResponse = await response.text()
+        console.error('Non-JSON response received:', textResponse)
+        throw new Error('Server returned invalid response format')
+      }
 
       if (response.ok && data.url) {
         console.log('Redirecting to Stripe Checkout:', data.url)

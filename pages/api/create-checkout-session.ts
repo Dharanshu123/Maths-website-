@@ -14,6 +14,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  // Set JSON content type for all responses
+  res.setHeader('Content-Type', 'application/json')
+  
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST')
     return res.status(405).json({ error: 'Method Not Allowed' })
@@ -82,14 +85,24 @@ export default async function handler(
   } catch (err: any) {
     console.error('Stripe checkout session creation error:', err)
     
-    // Return appropriate error message
-    const errorMessage = err.type === 'StripeCardError' 
-      ? 'Payment processing error. Please check your payment details.'
-      : err.message || 'An unexpected error occurred. Please try again.'
-    
-    res.status(err.statusCode || 500).json({ 
-      error: errorMessage,
-      type: err.type || 'api_error'
-    })
+    // Ensure we always return valid JSON
+    try {
+      // Return appropriate error message
+      const errorMessage = err.type === 'StripeCardError' 
+        ? 'Payment processing error. Please check your payment details.'
+        : err.message || 'An unexpected error occurred. Please try again.'
+      
+      return res.status(err.statusCode || 500).json({ 
+        error: errorMessage,
+        type: err.type || 'api_error'
+      })
+    } catch (finalError) {
+      // Last resort - ensure we return valid JSON
+      console.error('Final error handler:', finalError)
+      return res.status(500).json({ 
+        error: 'Internal server error',
+        type: 'api_error'
+      })
+    }
   }
 }
