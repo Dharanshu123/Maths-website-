@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState } from 'react'
 
 const Header = () => {
@@ -11,7 +12,21 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header__container">
-        <Link href="/" className="header__logo logo">Mathsmastery</Link>
+        <Link href="/" className="header__logo logo">
+          <Image 
+            src="/Mylogo.png" 
+            alt="Mathsmastery Logo" 
+            width={150} 
+            height={60}
+            priority
+            style={{ 
+              width: 'auto', 
+              height: 'auto',
+              maxWidth: '150px',
+              maxHeight: '60px'
+            }}
+          />
+        </Link>
         <div className="header__navigation">
           <div className="header__menu menu">
             <nav className={`menu__body ${menuOpen ? 'menu-open' : ''}`}>
