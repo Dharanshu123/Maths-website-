@@ -122,8 +122,12 @@ export default function Home() {
         {/* Hero Section */}
         <section className="page__main main">
           <div className="main__container">
-            <div className="urgency-banner">
-              <span className="urgency-text">🔥 Limited Spots Available - Enroll Today!</span>
+            <div className="urgency-banner" role="status" aria-live="polite">
+              <svg className="urgency-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{opacity: 0.7}}>
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12,6 12,12 16,14"/>
+              </svg>
+              <span className="urgency-text">Limited Spots Available - Enroll Today!</span>
             </div>
             <h3 className="main__caption">Australia's Leading Personalised Maths Tutoring</h3>
             <h1 className="main__title">We help your child do better at school,<br />grow in confidence and gain a<br />life-long love of learning</h1>
@@ -133,7 +137,15 @@ export default function Home() {
             <div className="cta-buttons">
               <Link href="/pricing" className="main__button primary">Get Started Today</Link>
               <div className="urgency-cta">
-                <span className="urgency-highlight">Early Bird Discount - Save 20%</span>
+                <span className="urgency-highlight" role="status" aria-live="polite">
+                  <svg className="urgency-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{opacity: 0.7}}>
+                    <path d="M8 2v4"/>
+                    <path d="M16 2v4"/>
+                    <rect width="18" height="18" x="3" y="4" rx="2"/>
+                    <path d="M3 10h18"/>
+                  </svg>
+                  Early Bird Discount - Save 20%
+                </span>
               </div>
             </div>
           </div>
@@ -239,7 +251,13 @@ export default function Home() {
         <section className="services-info-section">
           <div className="services__container">
             <div className="section-urgency">
-              <span className="urgency-badge">⏰ Only 3 Tutors Available This Week</span>
+              <span className="urgency-badge" role="status" aria-live="polite">
+                <svg className="urgency-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{opacity: 0.7}}>
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12,6 12,12 16,14"/>
+                </svg>
+                Only 3 Tutors Available This Week
+              </span>
             </div>
             <h2 className="section__title">Services Heading</h2>
             <div className="services__content">
@@ -370,7 +388,13 @@ export default function Home() {
         <section className="final-cta-section">
           <div className="cta__container">
             <div className="final-urgency-banner">
-              <span className="urgency-flash">⚡ Limited Time Offer</span>
+              <span className="urgency-flash" role="status" aria-live="polite">
+                <svg className="urgency-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{opacity: 0.7}}>
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12,6 12,12 16,14"/>
+                </svg>
+                Limited Time Offer
+              </span>
             </div>
             <h2 className="cta__title">Talk To Us Heading</h2>
             <p className="cta__text">
@@ -380,7 +404,7 @@ export default function Home() {
             <div className="final-cta-buttons">
               <Link href="/pricing" className="cta-button primary">BOOK YOUR FIRST SESSION NOW</Link>
               <div className="discount-highlight">
-                <span className="discount-text">🎯 Early Bird Discount - Save 20%</span>
+                <span className="discount-text">Early Bird Discount - Save 20%</span>
                 <span className="discount-subtext">Limited spots available this week</span>
               </div>
             </div>
@@ -391,9 +415,12 @@ export default function Home() {
         </section>
 
         {/* Floating Urgency Notification */}
-        <div className="floating-urgency">
+        <div className="floating-urgency" role="status" aria-live="polite">
           <div className="floating-content">
-            <span className="floating-icon">🔥</span>
+            <svg className="floating-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{opacity: 0.7, color: 'rgba(255, 255, 255, 0.9)'}}>
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12,6 12,12 16,14"/>
+            </svg>
             <div className="floating-text">
               <span className="floating-main">Limited Spots Available</span>
               <span className="floating-sub">Only 3 tutors left this week</span>
