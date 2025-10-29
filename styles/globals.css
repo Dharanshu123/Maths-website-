@@ -232,12 +232,12 @@ body {
 }
 
 .main__title {
-  font-size: 4.5rem;
+  font-size: 3.2rem;
   font-weight: 700;
   margin-bottom: 2rem;
   color: #ffffff;
   text-shadow: 0 6px 12px rgba(0, 0, 0, 0.9);
-  line-height: 1.2;
+  line-height: 1.1;
   letter-spacing: -0.02em;
   max-width: 1000px;
   margin-left: auto;
@@ -247,7 +247,7 @@ body {
 .main__text {
   margin-bottom: 3rem;
   max-width: 42rem;
-  line-height: 1.6;
+  line-height: 1.5;
   letter-spacing: 0.01em;
   color: #ffffff;
   text-shadow: 0 3px 6px rgba(0, 0, 0, 0.8);
@@ -306,8 +306,8 @@ body {
   }
   
   .main__title {
-    font-size: 3.5rem;
-    line-height: 1.2;
+    font-size: 2.5rem;
+    line-height: 1.1;
     max-width: 900px;
   }
   
@@ -335,8 +335,8 @@ body {
   }
   
   .main__title {
-    font-size: 2.8rem;
-    line-height: 1.2;
+    font-size: 2rem;
+    line-height: 1.1;
     margin-bottom: 1.5rem;
     max-width: 700px;
   }
@@ -345,7 +345,7 @@ body {
     font-size: 1.1rem;
     max-width: 28rem;
     margin-bottom: 2.5rem;
-    line-height: 1.5;
+    line-height: 1.4;
   }
   
   .main__button {
@@ -356,8 +356,8 @@ body {
 
 @media (max-width: 480px) {
   .main__title {
-    font-size: 2.2rem;
-    line-height: 1.25;
+    font-size: 1.6rem;
+    line-height: 1.15;
     max-width: 500px;
   }
   
@@ -1516,7 +1516,7 @@ iframe {
   }
 
   .main__title {
-    font-size: 3rem;
+    font-size: 2.2rem;
   }
 
   .title {
