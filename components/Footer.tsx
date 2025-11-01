@@ -10,13 +10,15 @@ const Footer = () => {
           <Image 
             src="/Mylogo.png" 
             alt="Mathsmastery Logo" 
-            width={140} 
-            height={56}
+            width={155} 
+            height={62}
             style={{ 
               width: 'auto', 
               height: 'auto',
-              maxWidth: '140px',
-              maxHeight: '56px'
+              maxWidth: '155px',
+              maxHeight: '62px',
+              background: 'transparent',
+              mixBlendMode: 'multiply'
             }}
           />
         </Link>

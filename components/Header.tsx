@@ -16,14 +16,16 @@ const Header = () => {
           <Image 
             src="/Mylogo.png" 
             alt="Mathsmastery Logo" 
-            width={225} 
-            height={90}
+            width={250} 
+            height={100}
             priority
             style={{ 
               width: 'auto', 
               height: 'auto',
-              maxWidth: '225px',
-              maxHeight: '90px'
+              maxWidth: '250px',
+              maxHeight: '100px',
+              background: 'transparent',
+              mixBlendMode: 'multiply'
             }}
           />
         </Link>

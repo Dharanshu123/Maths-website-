@@ -14,9 +14,12 @@
   height: auto;
   max-width: 100%;
   /* Ensure logo maintains transparency and quality */
-  background: transparent;
+  background: transparent !important;
+  mix-blend-mode: multiply;
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
+  /* Remove any white background */
+  filter: contrast(1.1) brightness(1.05);
 }
 
 body {
@@ -1562,8 +1565,8 @@ iframe {
   }
 
   .logo img {
-    max-width: 150px;
-    max-height: 60px;
+    max-width: 165px;
+    max-height: 66px;
   }
 
   .services-page__column {
@@ -1586,15 +1589,15 @@ iframe {
   }
 
   .logo img {
-    max-width: 195px;
-    max-height: 78px;
+    max-width: 215px;
+    max-height: 86px;
   }
 }
 
 @media (max-width: 530px) {
   .logo img {
-    max-width: 140px;
-    max-height: 56px;
+    max-width: 155px;
+    max-height: 62px;
   }
 
   .reviews__row {
