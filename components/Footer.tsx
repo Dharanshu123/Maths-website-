@@ -8,17 +8,16 @@ const Footer = () => {
         <Link href="#" className="footer__policy">Privacy Policy – Terms & Conditions</Link>
         <Link href="/" className="footer__logo logo">
           <Image 
-            src="/Mylogo.png" 
+            src="/Mylogo-transparent.png" 
             alt="Mathsmastery Logo" 
-            width={155} 
-            height={62}
+            width={150} 
+            height={60}
             style={{ 
               width: 'auto', 
-              height: 'auto',
-              maxWidth: '155px',
-              maxHeight: '62px',
-              background: 'transparent',
-              mixBlendMode: 'multiply'
+              height: '60px',
+              maxWidth: '150px',
+              maxHeight: '60px',
+              margin: '6px 0'
             }}
           />
         </Link>

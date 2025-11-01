@@ -14,18 +14,17 @@ const Header = () => {
       <div className="header__container">
         <Link href="/" className="header__logo logo">
           <Image 
-            src="/Mylogo.png" 
+            src="/Mylogo-transparent.png" 
             alt="Mathsmastery Logo" 
-            width={250} 
-            height={100}
+            width={160} 
+            height={64}
             priority
             style={{ 
               width: 'auto', 
-              height: 'auto',
-              maxWidth: '250px',
-              maxHeight: '100px',
-              background: 'transparent',
-              mixBlendMode: 'multiply'
+              height: '64px',
+              maxWidth: '160px',
+              maxHeight: '64px',
+              marginRight: '8px'
             }}
           />
         </Link>
