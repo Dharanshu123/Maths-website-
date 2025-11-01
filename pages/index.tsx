@@ -131,9 +131,6 @@ export default function Home() {
             </div>
             <h3 className="main__caption">Australia's Leading Personalised Maths Tutoring</h3>
             <h1 className="main__title">We help your child do better at school,<br />grow in confidence and gain a<br />life-long love of learning</h1>
-            <div className="main__text">
-              Australia's leading personalised maths tutoring — helping every student achieve confidence and mastery.
-            </div>
             <div className="cta-buttons">
               <Link href="/pricing" className="main__button primary">Get Started Today</Link>
               <div className="urgency-cta">
