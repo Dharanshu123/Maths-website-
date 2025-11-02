@@ -154,57 +154,9 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
       } else {
         throw new Error('Primary submission failed')
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Contact form submission error:', error)
-      
-      // EmailJS fallback (if configured)
-      try {
-        if (typeof window !== 'undefined' && (window as any).emailjs) {
-          await (window as any).emailjs.send(
-            process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-            process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-            {
-              guardian_name: `${formData.guardianFirstName} ${formData.guardianLastName}`,
-              phone: formData.phone,
-              email: formData.email,
-              student_name: formData.studentFirstName && formData.studentLastName 
-                ? `${formData.studentFirstName} ${formData.studentLastName}` 
-                : formData.studentFirstName || formData.studentLastName || 'Not provided',
-              school: formData.school || 'Not provided',
-              grade_level: formData.gradeLevel || 'Not provided',
-              message: formData.additionalComments || 'No additional comments',
-              source: 'Contact Modal (EmailJS Fallback)'
-            },
-            process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
-          )
-          
-          setSubmitStatus('success')
-          // Reset form
-          setFormData({
-            guardianFirstName: '',
-            guardianLastName: '',
-            phone: '',
-            email: '',
-            studentFirstName: '',
-            studentLastName: '',
-            school: '',
-            gradeLevel: '',
-            additionalComments: '',
-            website: ''
-          })
-          
-          // Close modal after 2 seconds
-          setTimeout(() => {
-            onClose()
-            setSubmitStatus('idle')
-          }, 2000)
-        } else {
-          throw new Error('EmailJS not available')
-        }
-      } catch (fallbackError) {
-        console.error('EmailJS fallback failed:', fallbackError)
-        setSubmitStatus('error')
-      }
+      setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
     }
@@ -218,50 +170,101 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
     }
   }
 
+  const inputStyle = {
+    width: '100%',
+    padding: '12px',
+    border: '1px solid #d1d5db',
+    borderRadius: '6px',
+    fontSize: '16px',
+    fontFamily: 'inherit'
+  }
+
+  const errorInputStyle = {
+    ...inputStyle,
+    borderColor: '#ef4444'
+  }
+
+  const labelStyle = {
+    display: 'block',
+    fontSize: '14px',
+    fontWeight: '500',
+    color: '#374151',
+    marginBottom: '4px'
+  }
+
+  const errorStyle = {
+    marginTop: '4px',
+    fontSize: '14px',
+    color: '#ef4444'
+  }
+
   return (
     <Modal isOpen={isOpen} onClose={handleClose} title="Contact Us" size="lg">
-      <div className="p-6">
-        <div className="grid md:grid-cols-3 gap-8">
+      <div style={{ padding: '24px' }}>
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: window.innerWidth > 768 ? '1fr 2fr' : '1fr', 
+          gap: '32px' 
+        }}>
           {/* Centre Info - Left Column */}
-          <div className="md:col-span-1">
-            <div className="bg-gray-50 rounded-lg p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">
+          <div>
+            <div style={{ 
+              background: '#f9fafb', 
+              borderRadius: '8px', 
+              padding: '24px' 
+            }}>
+              <h3 style={{ 
+                fontSize: '20px', 
+                fontWeight: 'bold', 
+                color: '#111827', 
+                marginBottom: '16px' 
+              }}>
                 Mathsmastery Institute
               </h3>
               
-              <div className="space-y-3">
-                <div className="flex items-center">
-                  <svg className="w-5 h-5 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <svg style={{ width: '20px', height: '20px', color: '#2563eb', marginRight: '12px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                   <a 
                     href="tel:+61426913932" 
-                    className="text-blue-600 hover:text-blue-800 font-medium"
+                    style={{ 
+                      color: '#2563eb', 
+                      fontWeight: '500',
+                      textDecoration: 'none'
+                    }}
                   >
                     0426 913 932
                   </a>
                 </div>
                 
-                <div className="flex items-center">
-                  <svg className="w-5 h-5 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <svg style={{ width: '20px', height: '20px', color: '#2563eb', marginRight: '12px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  <span className="text-gray-600">Sydney, NSW</span>
+                  <span style={{ color: '#4b5563' }}>Sydney, NSW</span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Contact Form - Right Column */}
-          <div className="md:col-span-2">
+          <div>
             {submitStatus === 'success' && (
-              <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                <div className="flex items-center">
-                  <svg className="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div style={{ 
+                marginBottom: '24px', 
+                padding: '16px', 
+                background: '#f0fdf4', 
+                border: '1px solid #bbf7d0', 
+                borderRadius: '8px' 
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <svg style={{ width: '20px', height: '20px', color: '#16a34a', marginRight: '8px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <p className="text-green-800 font-medium">
+                  <p style={{ color: '#166534', fontWeight: '500' }}>
                     Thank you! Your message has been sent successfully. We'll get back to you soon.
                   </p>
                 </div>
@@ -269,23 +272,34 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
             )}
 
             {submitStatus === 'error' && (
-              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-                <div className="flex items-center">
-                  <svg className="w-5 h-5 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div style={{ 
+                marginBottom: '24px', 
+                padding: '16px', 
+                background: '#fef2f2', 
+                border: '1px solid #fecaca', 
+                borderRadius: '8px' 
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <svg style={{ width: '20px', height: '20px', color: '#dc2626', marginRight: '8px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <p className="text-red-800 font-medium">
+                  <p style={{ color: '#991b1b', fontWeight: '500' }}>
                     Sorry, there was an error sending your message. Please try again or call us directly.
                   </p>
                 </div>
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit}>
               {/* Guardian Information */}
-              <div className="grid md:grid-cols-2 gap-4">
+              <div style={{ 
+                display: 'grid', 
+                gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr' : '1fr', 
+                gap: '16px',
+                marginBottom: '24px'
+              }}>
                 <div>
-                  <label htmlFor="guardianFirstName" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="guardianFirstName" style={labelStyle}>
                     Guardian First Name *
                   </label>
                   <input
@@ -294,18 +308,16 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                     name="guardianFirstName"
                     value={formData.guardianFirstName}
                     onChange={handleInputChange}
-                    className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                      errors.guardianFirstName ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    style={errors.guardianFirstName ? errorInputStyle : inputStyle}
                     disabled={isSubmitting}
                   />
                   {errors.guardianFirstName && (
-                    <p className="mt-1 text-sm text-red-600">{errors.guardianFirstName}</p>
+                    <p style={errorStyle}>{errors.guardianFirstName}</p>
                   )}
                 </div>
 
                 <div>
-                  <label htmlFor="guardianLastName" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="guardianLastName" style={labelStyle}>
                     Guardian Last Name *
                   </label>
                   <input
@@ -314,20 +326,23 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                     name="guardianLastName"
                     value={formData.guardianLastName}
                     onChange={handleInputChange}
-                    className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                      errors.guardianLastName ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    style={errors.guardianLastName ? errorInputStyle : inputStyle}
                     disabled={isSubmitting}
                   />
                   {errors.guardianLastName && (
-                    <p className="mt-1 text-sm text-red-600">{errors.guardianLastName}</p>
+                    <p style={errorStyle}>{errors.guardianLastName}</p>
                   )}
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-4">
+              <div style={{ 
+                display: 'grid', 
+                gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr' : '1fr', 
+                gap: '16px',
+                marginBottom: '24px'
+              }}>
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="phone" style={labelStyle}>
                     Phone *
                   </label>
                   <input
@@ -337,18 +352,16 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                     value={formData.phone}
                     onChange={handleInputChange}
                     placeholder="0426 913 932"
-                    className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                      errors.phone ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    style={errors.phone ? errorInputStyle : inputStyle}
                     disabled={isSubmitting}
                   />
                   {errors.phone && (
-                    <p className="mt-1 text-sm text-red-600">{errors.phone}</p>
+                    <p style={errorStyle}>{errors.phone}</p>
                   )}
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="email" style={labelStyle}>
                     Email *
                   </label>
                   <input
@@ -357,21 +370,24 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                      errors.email ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    style={errors.email ? errorInputStyle : inputStyle}
                     disabled={isSubmitting}
                   />
                   {errors.email && (
-                    <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                    <p style={errorStyle}>{errors.email}</p>
                   )}
                 </div>
               </div>
 
               {/* Student Information */}
-              <div className="grid md:grid-cols-2 gap-4">
+              <div style={{ 
+                display: 'grid', 
+                gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr' : '1fr', 
+                gap: '16px',
+                marginBottom: '24px'
+              }}>
                 <div>
-                  <label htmlFor="studentFirstName" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="studentFirstName" style={labelStyle}>
                     Student First Name
                   </label>
                   <input
@@ -380,13 +396,13 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                     name="studentFirstName"
                     value={formData.studentFirstName}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    style={inputStyle}
                     disabled={isSubmitting}
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="studentLastName" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="studentLastName" style={labelStyle}>
                     Student Last Name
                   </label>
                   <input
@@ -395,15 +411,20 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                     name="studentLastName"
                     value={formData.studentLastName}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    style={inputStyle}
                     disabled={isSubmitting}
                   />
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-4">
+              <div style={{ 
+                display: 'grid', 
+                gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr' : '1fr', 
+                gap: '16px',
+                marginBottom: '24px'
+              }}>
                 <div>
-                  <label htmlFor="school" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="school" style={labelStyle}>
                     School
                   </label>
                   <input
@@ -412,13 +433,13 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                     name="school"
                     value={formData.school}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    style={inputStyle}
                     disabled={isSubmitting}
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="gradeLevel" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="gradeLevel" style={labelStyle}>
                     Grade Level
                   </label>
                   <select
@@ -426,7 +447,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                     name="gradeLevel"
                     value={formData.gradeLevel}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    style={inputStyle}
                     disabled={isSubmitting}
                   >
                     {gradeOptions.map(option => (
@@ -439,8 +460,8 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
               </div>
 
               {/* Additional Comments */}
-              <div>
-                <label htmlFor="additionalComments" className="block text-sm font-medium text-gray-700 mb-1">
+              <div style={{ marginBottom: '24px' }}>
+                <label htmlFor="additionalComments" style={labelStyle}>
                   Additional Comments
                 </label>
                 <textarea
@@ -449,7 +470,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                   value={formData.additionalComments}
                   onChange={handleInputChange}
                   rows={4}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  style={inputStyle}
                   placeholder="Tell us about your child's needs, goals, or any specific requirements..."
                   disabled={isSubmitting}
                 />
@@ -467,15 +488,20 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
               />
 
               {/* Consent Notice */}
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <p className="text-sm text-gray-600">
+              <div style={{ 
+                background: '#f9fafb', 
+                padding: '16px', 
+                borderRadius: '8px',
+                marginBottom: '24px'
+              }}>
+                <p style={{ fontSize: '14px', color: '#4b5563', lineHeight: '1.5' }}>
                   By clicking "Submit," you agree to receive recurring advertising emails, text messages and calls from 
                   Mathsmastery and its independently owned learning centres about our offerings to the phone 
                   number/email provided above, including calls and texts placed using an automatic telephone dialing 
                   system. Consent to receive advertising text messages and calls is not required to purchase goods or 
                   services. Message frequency varies. Message and data rates may apply. Reply STOP to no longer receive 
                   messages. Email{' '}
-                  <a href="mailto:info@mathsmastery.com" className="text-blue-600 hover:text-blue-800">
+                  <a href="mailto:info@mathsmastery.com" style={{ color: '#2563eb' }}>
                     info@mathsmastery.com
                   </a>{' '}
                   for assistance. By clicking "Submit," you also consent to Mathsmastery's Terms and Conditions of Use and Privacy Policy.
@@ -483,22 +509,34 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
               </div>
 
               {/* Submit Button */}
-              <div className="flex justify-end">
+              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <button
                   type="submit"
                   disabled={isSubmitting || submitStatus === 'success'}
-                  className={`px-8 py-3 rounded-lg font-semibold text-white transition-all ${
-                    isSubmitting || submitStatus === 'success'
-                      ? 'bg-gray-400 cursor-not-allowed'
-                      : 'bg-blue-600 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'
-                  }`}
+                  style={{
+                    padding: '16px 32px',
+                    borderRadius: '8px',
+                    fontWeight: '600',
+                    fontSize: '16px',
+                    color: 'white',
+                    background: isSubmitting || submitStatus === 'success' 
+                      ? '#9ca3af' 
+                      : 'linear-gradient(135deg, #007bff 0%, #0056b3 100%)',
+                    border: 'none',
+                    cursor: isSubmitting || submitStatus === 'success' ? 'not-allowed' : 'pointer',
+                    transition: 'all 0.3s ease'
+                  }}
                 >
                   {isSubmitting ? (
-                    <div className="flex items-center">
-                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <div style={{
+                        width: '16px',
+                        height: '16px',
+                        border: '2px solid transparent',
+                        borderTop: '2px solid currentColor',
+                        borderRadius: '50%',
+                        animation: 'spin 1s linear infinite'
+                      }}></div>
                       Submitting...
                     </div>
                   ) : submitStatus === 'success' ? (
