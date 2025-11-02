@@ -3,8 +3,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Layout from '../components/Layout'
 import ContactForm from '../components/ContactForm'
-import ContactTest from '../components/ContactTest'
-import EmailJSTest from '../components/EmailJSTest' // EmailJS testing
 
 export default function Contact() {
   return (
@@ -95,12 +93,6 @@ export default function Contact() {
             </div>
           </div>
         </section>
-
-               {/* Supabase Connection Test */}
-               <ContactTest />
-
-               {/* EmailJS Test Component */}
-               <EmailJSTest />
 
         {/* Contact Form Section */}
         <section className="page__contact-form">
