@@ -60,7 +60,7 @@ export default function Contact() {
                 </Link>
               </div>
               <p className="mt-6 text-sm text-neutral-400">
-                Prefer a quick chat? Call us now or <a href="/pricing" className="text-blue-500 hover:underline">see pricing</a> to get started.
+                Prefer a quick chat? Call us now or <Link href="/pricing" className="text-blue-500 hover:underline">see pricing</Link> to get started.
               </p>
               <div className="contact__links">
                 <Link href="#" className="contact__link">

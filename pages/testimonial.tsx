@@ -149,7 +149,7 @@ export default function Testimonial() {
                     <div className="item-reviews">
                       <div className="item-reviews__img">
                         {testimonial.image ? (
-                          <img
+                          <Image
                             src={`${testimonial.image}?v=${Date.now()}`}
                             alt={`${testimonial.name} - ${testimonial.role}`}
                             width={80}
