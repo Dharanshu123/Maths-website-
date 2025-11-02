@@ -1,15 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import Stripe from 'stripe'
 
-// Initialize Stripe with proper error handling
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error('STRIPE_SECRET_KEY is not set in environment variables')
-}
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2025-09-30.clover',
-})
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -23,6 +14,18 @@ export default async function handler(
   }
 
   try {
+    // Initialize Stripe with proper error handling
+    if (!process.env.STRIPE_SECRET_KEY) {
+      console.error('STRIPE_SECRET_KEY is not set in environment variables')
+      return res.status(500).json({ 
+        error: 'Payment system configuration error. Please contact support.',
+        details: 'STRIPE_SECRET_KEY not configured'
+      })
+    }
+
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: '2025-09-30.clover',
+    })
     const { planName, planPrice, planFeatures } = req.body
 
     // Validate required fields

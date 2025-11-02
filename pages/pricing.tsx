@@ -130,8 +130,22 @@ export default function Pricing() {
       console.error('Payment error:', error)
       setLoadingPlan(null)
       
-      // Show user-friendly error message
-      const errorMessage = error.message || 'Unable to process payment. Please try again.'
+      // Determine specific error message
+      let errorMessage = 'Unable to process payment. Please try again.'
+      let errorDetails = ''
+      
+      if (error.message) {
+        if (error.message.includes('configuration error')) {
+          errorMessage = 'Payment system is currently being configured. Please try again in a few minutes or contact us directly.'
+          errorDetails = 'Configuration Error'
+        } else if (error.message.includes('Invalid response format')) {
+          errorMessage = 'Payment system is temporarily unavailable. Please contact us at 0426 913 932.'
+          errorDetails = 'System Error'
+        } else {
+          errorMessage = error.message
+          errorDetails = 'Payment Error'
+        }
+      }
       
       // Create a simple error notification instead of alert
       const errorDiv = document.createElement('div')
@@ -147,18 +161,23 @@ export default function Pricing() {
           border-radius: 8px;
           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
           z-index: 1000;
-          max-width: 300px;
+          max-width: 350px;
+          font-size: 14px;
         ">
-          <strong>Payment Error:</strong><br>
+          <strong>${errorDetails}:</strong><br>
           ${errorMessage}
+          <br><br>
+          <small>Need help? Call us at <strong>0426 913 932</strong></small>
         </div>
       `
       document.body.appendChild(errorDiv)
       
-      // Remove error message after 5 seconds
+      // Remove error message after 8 seconds (longer for more detailed message)
       setTimeout(() => {
-        document.body.removeChild(errorDiv)
-      }, 5000)
+        if (document.body.contains(errorDiv)) {
+          document.body.removeChild(errorDiv)
+        }
+      }, 8000)
     }
   }
 
