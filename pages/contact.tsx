@@ -26,31 +26,27 @@ export default function Contact() {
             <div className="contact__contacts">
               <h2 className="contact__title">You can find us at</h2>
               <div className="contact__connect connect-contact">
-                <Link href="tel:+61426913932" className="connect-contact__item">
+                <Link href="tel:+61426913932" className="connect-contact__item hover:underline">
                   <div className="connect-contact__icon">
                     <Image src="/img/contact/phone.svg" alt="ico" width={24} height={24} />
                   </div>
                   <div className="connect-contact__content">
                     <h3 className="connect-contant__type">Phone</h3>
-                    <div className="connect-contact__label">
-                      <a href="tel:+61426913932" className="hover:underline">0426 913 932</a>
-                    </div>
+                    <div className="connect-contact__label">0426 913 932</div>
                   </div>
                 </Link>
-                <Link href="mailto:mathstutoring412@gmail.com" className="connect-contact__item">
+                <Link href="mailto:mathstutoring412@gmail.com" className="connect-contact__item hover:underline">
                   <div className="connect-contact__icon">
                     <Image src="/img/contact/email.svg" alt="ico" width={24} height={24} />
                   </div>
                   <div className="connect-contact__content">
                     <h3 className="connect-contant__type">Email</h3>
-                    <div className="connect-contact__label">
-                      <a href="mailto:mathstutoring412@gmail.com" className="hover:underline">mathstutoring412@gmail.com</a>
-                    </div>
+                    <div className="connect-contact__label">mathstutoring412@gmail.com</div>
                   </div>
                 </Link>
                 <Link 
                   href="https://www.google.com/maps/search/?api=1&query=Bellamy+Street,+Pennant+Hills,+NSW+2120,+Sydney"
-                  className="connect-contact__item"
+                  className="connect-contact__item hover:underline"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -60,14 +56,7 @@ export default function Contact() {
                   <div className="connect-contact__content">
                     <h3 className="connect-contant__type">Address</h3>
                     <div className="connect-contact__label">
-                      <a
-                        href="https://www.google.com/maps/search/?api=1&query=Bellamy+Street,+Pennant+Hills,+NSW+2120,+Sydney"
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="hover:underline"
-                      >
-                        Bellamy Street, Pennant Hills, NSW 2120, Sydney
-                      </a>
+                      Bellamy Street, Pennant Hills, NSW 2120, Sydney
                     </div>
                   </div>
                 </Link>
