@@ -103,7 +103,7 @@ Submitted at: ${new Date().toLocaleString('en-AU', {
     `
 
     let emailSent = false
-    let emailError = null
+    let emailError: any = null
 
     // Try sending email via Nodemailer (Gmail) first
     if (process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD && 
@@ -112,7 +112,7 @@ Submitted at: ${new Date().toLocaleString('en-AU', {
       
       try {
         // Configure nodemailer
-        const transporter = nodemailer.createTransporter({
+        const transporter = nodemailer.createTransport({
           service: 'gmail',
           auth: {
             user: process.env.GMAIL_USER,
