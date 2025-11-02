@@ -17,7 +17,7 @@ export default function Contact() {
           <div className="main__container main__container_pages">
             <h1 className="main__title">Contact</h1>
             <div className="main__text main__text_pages">
-              Subheading: Craft a compelling subheading that sparks curiosity.
+              We're here to help—reach out to book a trial, ask a question, or plan a study path.
             </div>
           </div>
         </section>
@@ -26,26 +26,30 @@ export default function Contact() {
             <div className="contact__contacts">
               <h2 className="contact__title">You can find us at</h2>
               <div className="contact__connect connect-contact">
-                <Link href="tel:+1234567890" className="connect-contact__item">
+                <Link href="tel:+61426913932" className="connect-contact__item">
                   <div className="connect-contact__icon">
                     <Image src="/img/contact/phone.svg" alt="ico" width={24} height={24} />
                   </div>
                   <div className="connect-contact__content">
                     <h3 className="connect-contant__type">Phone</h3>
-                    <div className="connect-contact__label">+123 456 7890</div>
+                    <div className="connect-contact__label">
+                      <a href="tel:+61426913932" className="hover:underline">0426 913 932</a>
+                    </div>
                   </div>
                 </Link>
-                <Link href="mailto:email@website.com" className="connect-contact__item">
+                <Link href="mailto:mathstutoring412@gmail.com" className="connect-contact__item">
                   <div className="connect-contact__icon">
                     <Image src="/img/contact/email.svg" alt="ico" width={24} height={24} />
                   </div>
                   <div className="connect-contact__content">
                     <h3 className="connect-contant__type">Email</h3>
-                    <div className="connect-contact__label">email@website.com</div>
+                    <div className="connect-contact__label">
+                      <a href="mailto:mathstutoring412@gmail.com" className="hover:underline">mathstutoring412@gmail.com</a>
+                    </div>
                   </div>
                 </Link>
                 <Link 
-                  href="https://www.google.com/maps/place/Skill+Chart/@34.0349095,-118.6967567,942m/data=!3m2!1e3!4b1!4m6!3m5!1s0x80e81e35198c4237:0x9be35a11a754469a!8m2!3d34.0349051!4d-118.6941818!16s%2Fg%2F11vr04dx6l?hl=en&entry=ttu&g_ep=EgoyMDI1MDEwMS4wIKXMDSoASAFQAw%3D%3D"
+                  href="https://www.google.com/maps/search/?api=1&query=Bellamy+Street,+Pennant+Hills,+NSW+2120,+Sydney"
                   className="connect-contact__item"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -55,10 +59,22 @@ export default function Contact() {
                   </div>
                   <div className="connect-contact__content">
                     <h3 className="connect-contant__type">Address</h3>
-                    <div className="connect-contact__label">2727 Ocean Road, Malibu, CA, 90264</div>
+                    <div className="connect-contact__label">
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=Bellamy+Street,+Pennant+Hills,+NSW+2120,+Sydney"
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="hover:underline"
+                      >
+                        Bellamy Street, Pennant Hills, NSW 2120, Sydney
+                      </a>
+                    </div>
                   </div>
                 </Link>
               </div>
+              <p className="mt-6 text-sm text-neutral-400">
+                Prefer a quick chat? Call us now or <a href="/pricing" className="text-blue-500 hover:underline">see pricing</a> to get started.
+              </p>
               <div className="contact__links">
                 <Link href="#" className="contact__link">
                   <Image src="/img/contact/fb.svg" alt="icon" width={24} height={24} />
@@ -81,13 +97,10 @@ export default function Contact() {
               <h2 className="contact__title">Let us get in touch</h2>
               <div className="contact__text">
                 <p>
-                  About Text: In this section, you can provide a detailed paragraph that delves into the history,
-                  values, and mission of your web development business. Highlight expertise, unique approach of your
-                  team, and the commitment that sets you apart.
+                  At Mathsmastery Institute, we make maths simple, structured, and confidence-building. Whether you're enquiring about weekly lessons, exam preparation, or a custom learning plan, our team is ready to help.
                 </p>
                 <p>
-                  Emphasize your passion for creating exceptional web solutions and convey your dedication to delivering
-                  remarkable results for clients.
+                  Tell us a little about your goals and we'll recommend the right pathway—book a trial, schedule a call, or send us a message and we'll get back to you promptly.
                 </p>
               </div>
             </div>
@@ -107,7 +120,7 @@ export default function Contact() {
 
         <section className="page__map map">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d16411.20345240449!2d-118.6941818!3d34.0349051!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80e81e35198c4237%3A0x9be35a11a754469a!2sSkill%20Chart!5e1!3m2!1sen!2sua!4v1736237616553!5m2!1sen!2sua"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3316.123456789!2d151.0833333!3d-33.7333333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzPCsDQ0JzAwLjAiUyAxNTHCsDA1JzAwLjAiRQ!5e0!3m2!1sen!2sau!4v1640995200000!5m2!1sen!2sau&q=Pennant+Hills+NSW+2120+Australia"
             width="600" 
             height="450" 
             style={{ border: 0 }} 
