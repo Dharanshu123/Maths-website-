@@ -3371,6 +3371,33 @@ iframe {
   100% { transform: rotate(360deg); }
 }
 
+/* Contact Modal Responsive Styles */
+.contact-modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 32px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  .contact-modal-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .urgency-banner,
   .urgency-highlight,

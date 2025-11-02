@@ -203,9 +203,9 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
       <div style={{ padding: '24px' }}>
         <div style={{ 
           display: 'grid', 
-          gridTemplateColumns: window.innerWidth > 768 ? '1fr 2fr' : '1fr', 
+          gridTemplateColumns: '1fr 2fr', 
           gap: '32px' 
-        }}>
+        }} className="contact-modal-grid">
           {/* Centre Info - Left Column */}
           <div>
             <div style={{ 
@@ -294,10 +294,10 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
               {/* Guardian Information */}
               <div style={{ 
                 display: 'grid', 
-                gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr' : '1fr', 
+                gridTemplateColumns: '1fr 1fr', 
                 gap: '16px',
                 marginBottom: '24px'
-              }}>
+              }} className="form-row">
                 <div>
                   <label htmlFor="guardianFirstName" style={labelStyle}>
                     Guardian First Name *
@@ -337,10 +337,10 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
 
               <div style={{ 
                 display: 'grid', 
-                gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr' : '1fr', 
+                gridTemplateColumns: '1fr 1fr', 
                 gap: '16px',
                 marginBottom: '24px'
-              }}>
+              }} className="form-row">
                 <div>
                   <label htmlFor="phone" style={labelStyle}>
                     Phone *
@@ -382,10 +382,10 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
               {/* Student Information */}
               <div style={{ 
                 display: 'grid', 
-                gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr' : '1fr', 
+                gridTemplateColumns: '1fr 1fr', 
                 gap: '16px',
                 marginBottom: '24px'
-              }}>
+              }} className="form-row">
                 <div>
                   <label htmlFor="studentFirstName" style={labelStyle}>
                     Student First Name
@@ -419,10 +419,10 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
 
               <div style={{ 
                 display: 'grid', 
-                gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr' : '1fr', 
+                gridTemplateColumns: '1fr 1fr', 
                 gap: '16px',
                 marginBottom: '24px'
-              }}>
+              }} className="form-row">
                 <div>
                   <label htmlFor="school" style={labelStyle}>
                     School
