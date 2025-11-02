@@ -1,7 +1,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { useContactModal } from '../contexts/ContactModalContext'
 
 const Footer = () => {
+  const { openContactModal } = useContactModal()
+
   return (
     <footer className="footer">
       <div className="footer__container">
@@ -21,6 +24,14 @@ const Footer = () => {
             }}
           />
         </Link>
+        <div className="footer__actions">
+          <button 
+            onClick={openContactModal}
+            className="footer__contact-btn"
+          >
+            Contact Us
+          </button>
+        </div>
         <div className="footer__copyright">Copyright © 2025 Mathsmastery – All Rights Reserved</div>
       </div>
     </footer>

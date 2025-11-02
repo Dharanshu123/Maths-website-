@@ -1348,6 +1348,81 @@ body {
   line-height: 1.2;
 }
 
+/* Contact Modal Button Styles */
+.contact-us-btn {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.contact-us-btn:hover {
+  background: linear-gradient(135deg, #0056b3 0%, #003d82 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.footer__actions {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.footer__contact-btn {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.footer__contact-btn:hover {
+  background: linear-gradient(135deg, #0056b3 0%, #003d82 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+/* Header actions responsive */
+@media (max-width: 991.98px) {
+  .header__actions {
+    gap: 8px;
+  }
+  
+  .contact-us-btn {
+    padding: 10px 18px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .header__actions {
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .contact-us-btn {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+  
+  .footer__contact-btn {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+}
+
 /* ****************CONTACT PAGE****************/
 
 .main_contact {

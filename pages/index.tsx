@@ -215,7 +215,7 @@ export default function Home() {
         <section className="about-section-orange">
           <div className="about__container">
             <div className="about__content">
-              <h2 className="about__title">About Heading</h2>
+              <h2 className="about__title">Who We Are</h2>
               <div className="about__text">
                 <p>
                   At Mathsmastery Institute, we are dedicated to transforming the way students understand and enjoy mathematics. Our mission is to make learning both engaging and effective by combining expert teaching methods with personalized support.

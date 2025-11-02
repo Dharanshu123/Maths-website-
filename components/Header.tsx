@@ -1,9 +1,11 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
+import { useContactModal } from '../contexts/ContactModalContext'
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false)
+  const { openContactModal } = useContactModal()
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen)
@@ -51,7 +53,13 @@ const Header = () => {
             </nav>
           </div>
           <div className="header__actions actions-header">
-            <Link href="tel:+1234567890" className="call-us-btn">Call Us</Link>
+            <Link href="tel:+61426913932" className="call-us-btn">Call Us</Link>
+            <button 
+              onClick={openContactModal}
+              className="contact-us-btn"
+            >
+              Contact Us
+            </button>
             <Link href="/pricing" className="enrol-now-btn">Enrol Now!</Link>
             <button 
               type="button" 
