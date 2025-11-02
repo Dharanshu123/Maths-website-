@@ -4,12 +4,10 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Layout from '../components/Layout'
 import { supabase, PricingPlan } from '../lib/supabase'
-import { useContactModal } from '../contexts/ContactModalContext'
 
 export default function Pricing() {
   const router = useRouter()
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null)
-  const { openContactModal } = useContactModal()
   // Professional pricing plans with systematic structure
   const pricingPlans = [
     {
@@ -84,12 +82,6 @@ export default function Pricing() {
 
   const handlePayment = async (plan: any) => {
     if (loadingPlan) return // Prevent multiple clicks
-
-    // If this is the "Contact Us" plan, open the modal instead
-    if (plan.buttonText === "Contact Us") {
-      openContactModal()
-      return
-    }
 
     setLoadingPlan(plan.id.toString())
 
@@ -272,7 +264,7 @@ export default function Pricing() {
             <div className="outro__text">
               Contact us today to discuss your project and find the perfect plan for your business needs.
             </div>
-            <button onClick={openContactModal} className="outro__button button">Contact Us</button>
+            <Link href="/contact" className="outro__button button">Contact Us</Link>
           </div>
         </section>
       </Layout>
